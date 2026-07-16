@@ -16,7 +16,6 @@ Your personalized AI companion for learning, building, and growing as a develope
 
 ### Step 2: Push to GitHub
 ```bash
-cd forge-app
 git init
 git add .
 git commit -m "feat: Forge AI companion"

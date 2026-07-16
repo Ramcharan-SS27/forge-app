@@ -60,6 +60,7 @@ export default function GoalsPage() {
   };
 
   const analyze = async (goal: Goal) => {
+    if (!profile) return;
     setAnalyzing(goal.id);
     try {
       const apiKey = storage.apiKey.get();
@@ -68,7 +69,7 @@ export default function GoalsPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', ...(apiKey ? { 'x-api-key': apiKey } : {}) },
         body: JSON.stringify({
-          system: goalAnalysisSystem(),
+          system: goalAnalysisSystem(profile),
           messages: [{ role: 'user', content: `Goal: ${goal.title}\nDescription: ${goal.description}\nTarget: ${goal.target_date}\nProgress: ${goal.progress}%\n\nWork logs:\n${logsText || 'No logs yet.'}` }],
         }),
       });
